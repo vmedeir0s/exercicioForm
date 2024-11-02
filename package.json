@@ -1,0 +1,31 @@
+{
+  "name": "projeto-exerc-form",
+  "version": "1.0.0",
+  "description": "Criação de uma aplicação web simples em Node.js que realiza processamento de um formulário",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vmedeir0s/exercicioForm.git"
+  },
+  "keywords": [
+    "HTTP",
+    "POST",
+    "JavaScript",
+    "Node",
+    "Express"
+  ],
+  "author": "Vinicius Medeiros",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vmedeir0s/exercicioForm/issues"
+  },
+  "homepage": "https://github.com/vmedeir0s/exercicioForm#readme",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
