@@ -3,6 +3,37 @@ const PORT = 3000;
 
 const app = express();
 
+const style = `
+  <style>
+    body {
+      background-color: rgb(30 41 59);
+      color: white;
+    }
+
+    .form-control {
+      border-width: 1px;
+    }
+
+    .form-control:focus {
+      border-color: #34d399;
+      box-shadow: 0 0 0 0.1rem rgba(52, 211, 153, 1);
+    }
+    
+    .btn-primary {
+      background-color: #10b981;
+      border:none;
+      color: #374151;
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      background-color: #34d399;
+      color: #374151;
+    }
+
+  </style>
+`;
+
 app.get('/cadastrarcliente', (req, res) => {
   res.send(`
     <!DOCTYPE html>
@@ -16,10 +47,12 @@ app.get('/cadastrarcliente', (req, res) => {
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
           crossorigin="anonymous"
         />
+        ${style}
         <title>Formulário de Cadastro</title>
       </head>
       <body>
         <div class="container mt-5">
+          <h1>Cadastro de Clientes</h1>
           <form>
             <div class="form-row">
               <div class="form-group">
@@ -34,15 +67,19 @@ app.get('/cadastrarcliente', (req, res) => {
                 <label class="form-label" for="userPassword">Senha:</label>
                 <input type="password" class="form-control" id="userPassword" />
               </div>
+              <div class="form-group">
+                <label class="form-label" for="userPhone">Telefone:</label>
+                <input type="text" class="form-control" id="userPhone" />
+              </div>
             </div>
-            <div class="form-row">
+            <div class="form-row d-flex justify-content-between">
               <div class="form-group col-md-6">
                 <label for="userCity">Cidade</label>
                 <input type="text" class="form-control" id="userCity" />
               </div>
-              <div class="form-group col-md-4">
-                <label for="inputState">Estado</label>
-                <select id="inputState" class="form-control" required>
+              <div class="form-group col-md-5">
+                <label for="userState">Estado</label>
+                <select id="userState" class="form-control">
                   <option selected hidden>Escolha...</option>
                   <option value="AC">Acre</option>
                   <option value="AL">Alagoas</option>
@@ -73,11 +110,11 @@ app.get('/cadastrarcliente', (req, res) => {
                   <option value="TO">Tocantins</option>
                 </select>
               </div>
-              <div class="form-group">
+            </div>
+            <div class="form-group">
                 <label for="userAddress">Endereço</label>
                 <input type="text" class="form-control" id="userAddress" />
               </div>
-            </div>
             <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
           </form>
         </div>
