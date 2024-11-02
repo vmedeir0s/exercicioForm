@@ -31,6 +31,15 @@ const style = `
       color: #374151;
     }
 
+    a{
+      color: #34d399;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #10b981;
+    }
+
   </style>
 `;
 
@@ -51,8 +60,8 @@ app.get('/cadastrarcliente', (req, res) => {
         <title>Formulário de Cadastro</title>
       </head>
       <body>
-        <div class="container mt-5">
-          <h1>Cadastro de Clientes</h1>
+        <div class="container mt-5 flex-column align-items-center">
+          <h1 class="text-center mb-5">Cadastro de Clientes</h1>
           <form>
             <div class="form-row">
               <div class="form-group">
@@ -117,6 +126,16 @@ app.get('/cadastrarcliente', (req, res) => {
               </div>
             <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
           </form>
+          <footer class="mt-5 text-center">
+            <p>
+              Desenvolvido por
+                <a 
+                  href="https://www.github.com/vmedeir0s/"
+                  target="_blank"
+                  >Vinicius de Medeiros
+                </a>👨‍💻
+            </p>
+          </footer>
         </div>
         <script
           src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
