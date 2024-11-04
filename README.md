@@ -14,8 +14,10 @@ Este projeto, desenvolvido para a disciplina de Programação para Internet, dem
 
 - Node.js
 - Express.js
-- HTML
+- HTTP
 - JavaScript
-- [Outras tecnologias utilizadas, como frameworks de front-end, bancos de dados, etc.]
+- GitHub
+- Vercel
+
 
 **Link da Aplicação:** https://
