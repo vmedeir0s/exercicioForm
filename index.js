@@ -3,6 +3,8 @@ const PORT = 3000;
 
 const app = express();
 
+var clientes_DB = [];
+
 const style = `
   <style>
     body {
@@ -43,6 +45,9 @@ const style = `
   </style>
 `;
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.get('/', (_req, res) => {
   res.send(`
     <!DOCTYPE html>
@@ -57,13 +62,13 @@ app.get('/', (_req, res) => {
           crossorigin="anonymous"
         />
         ${style}
-        <title>Formulário de Cadastro</title>
+        <title>Início</title>
       </head>
       <body>
         <div class="container mt-1 flex-column align-items-center">
           <nav class="navbar navbar-light border-bottom">
             <div class="container-fluid justify-content-start">
-              <a href="#" class="px-3">Início</a>
+              <a href="/" class="px-3">Início</a>
               <a href="/cadastrarcliente" class="px-3">Cadastrar Cliente</a>
             </div>
           </nav>
@@ -113,33 +118,33 @@ app.get('/cadastrarcliente', (_req, res) => {
             </div>
           </nav>
           <h1 class="text-center my-5">Cadastro de Clientes</h1>
-          <form>
+          <form method="POST" action="/cadastrarcliente">
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label" for="userName">Nome:</label>
-                <input type="text" class="form-control" id="userName" />
+                <input type="text" class="form-control" name="userName" id="userName" />
               </div>
               <div class="form-group">
                 <label class="form-label" for="userEmail">Email:</label>
-                <input type="text" class="form-control" id="userEmail" />
+                <input type="text" class="form-control" name="userEmail" id="userEmail" />
               </div>
               <div class="form-group">
                 <label class="form-label" for="userPassword">Senha:</label>
-                <input type="password" class="form-control" id="userPassword" />
+                <input type="password" class="form-control" name="userPassword" id="userPassword" />
               </div>
               <div class="form-group">
                 <label class="form-label" for="userPhone">Telefone:</label>
-                <input type="text" class="form-control" id="userPhone" />
+                <input type="text" class="form-control" name="userPhone" id="userPhone" />
               </div>
             </div>
             <div class="form-row d-flex justify-content-between">
               <div class="form-group col-md-6">
                 <label for="userCity">Cidade</label>
-                <input type="text" class="form-control" id="userCity" />
+                <input type="text" class="form-control" name="userCity" id="userCity" />
               </div>
               <div class="form-group col-md-5">
                 <label for="userState">Estado</label>
-                <select id="userState" class="form-control">
+                <select name="userState" id="userState" class="form-control">
                   <option selected hidden>Escolha...</option>
                   <option value="AC">Acre</option>
                   <option value="AL">Alagoas</option>
@@ -173,7 +178,7 @@ app.get('/cadastrarcliente', (_req, res) => {
             </div>
             <div class="form-group">
                 <label for="userAddress">Endereço</label>
-                <input type="text" class="form-control" id="userAddress" />
+                <input type="text" class="form-control" name="userAddress" id="userAddress" />
               </div>
             <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
           </form>
@@ -196,6 +201,101 @@ app.get('/cadastrarcliente', (_req, res) => {
       </body>
     </html>
   `);
+});
+
+app.post('/cadastrarcliente', (req, res) => {
+  const {
+    userName,
+    userEmail,
+    userPassword,
+    userPhone,
+    userCity,
+    userState,
+    userAddress,
+  } = req.body;
+
+  const cliente = {
+    userName,
+    userEmail,
+    userPassword,
+    userPhone,
+    userCity,
+    userState,
+    userAddress,
+  };
+
+  clientes_DB.push(cliente);
+
+  res.write(`
+    <!DOCTYPE html>
+    <html lang="pt-br">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossorigin="anonymous"
+        />
+        ${style}
+        <title>Lista de Clientes</title>
+      </head>
+      <body>
+        <div class="container mt-1 flex-column align-items-center">
+          <nav class="navbar navbar-light border-bottom">
+            <div class="container-fluid justify-content-start">
+              <a href="/" class="px-3">Início</a>
+              <a href="/cadastrarcliente" class="px-3">Cadastrar Cliente</a>
+            </div>
+          </nav>
+          <table class="table table-dark table-sm">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Cidade</th>
+                <th scope="col">Estado</th>
+              </tr>
+            </thead>
+            <tbody>`);
+  for (let i = 0; i < clientes_DB.length; i++) {
+    res.write(` <tr>
+                  <td scope="row">${i + 1}</td>
+                  <td>${clientes_DB[i].userName}</td>
+                  <td>${clientes_DB[i].userEmail}</td>
+                  <td>${clientes_DB[i].userPhone}</td>
+                  <td>${clientes_DB[i].userCity}</td>
+                  <td>${clientes_DB[i].userState}</td>
+                </tr>
+    `);
+  }
+
+  res.write(`
+            </tbody>
+          </table>
+          <footer class="mt-5 text-center">
+            <p>
+              Desenvolvido por
+                <a 
+                  href="https://www.github.com/vmedeir0s/"
+                  target="_blank"
+                  >Vinicius de Medeiros
+                </a>👨‍💻
+            </p>
+          </footer>
+        </div>
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+          crossorigin="anonymous"
+        ></script>
+      </body>
+    </html>
+  `);
+  res.end();
 });
 
 app.listen(PORT, () => {
