@@ -43,7 +43,7 @@ const style = `
   </style>
 `;
 
-app.get('/cadastrarcliente', (req, res) => {
+app.get('/', (_req, res) => {
   res.send(`
     <!DOCTYPE html>
     <html lang="pt-br">
@@ -60,8 +60,59 @@ app.get('/cadastrarcliente', (req, res) => {
         <title>Formulário de Cadastro</title>
       </head>
       <body>
-        <div class="container mt-5 flex-column align-items-center">
-          <h1 class="text-center mb-5">Cadastro de Clientes</h1>
+        <div class="container mt-1 flex-column align-items-center">
+          <nav class="navbar navbar-light border-bottom">
+            <div class="container-fluid justify-content-start">
+              <a href="#" class="px-3">Início</a>
+              <a href="/cadastrarcliente" class="px-3">Cadastrar Cliente</a>
+            </div>
+          </nav>
+          <footer class="mt-5 text-center">
+            <p>
+              Desenvolvido por
+                <a 
+                  href="https://www.github.com/vmedeir0s/"
+                  target="_blank"
+                  >Vinicius de Medeiros
+                </a>👨‍💻
+            </p>
+          </footer>
+        </div>
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+          crossorigin="anonymous"
+        ></script>
+      </body>
+    </html>
+  `);
+});
+
+app.get('/cadastrarcliente', (_req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="pt-br">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossorigin="anonymous"
+        />
+        ${style}
+        <title>Formulário de Cadastro</title>
+      </head>
+      <body>
+        <div class="container mt-1 flex-column align-items-center">
+          <nav class="navbar navbar-light border-bottom">
+            <div class="container-fluid justify-content-start">
+              <a href="/" class="px-3">Início</a>
+              <a href="/cadastrarcliente" class="px-3">Cadastrar Cliente</a>
+            </div>
+          </nav>
+          <h1 class="text-center my-5">Cadastro de Clientes</h1>
           <form>
             <div class="form-row">
               <div class="form-group">
